@@ -1,0 +1,4 @@
+[submodule "biosensor"]
+	path = biosensor
+	url = git@github.com:kape1395/biosensor.solver-2D.git
+	update = checkout
