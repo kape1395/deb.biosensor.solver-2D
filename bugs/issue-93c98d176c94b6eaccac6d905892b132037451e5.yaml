@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Make build script interactive.
+desc: ""
+type: :task
+component: kape1395.biosensor.solver-2D.deb
+release: 
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-10-17 23:18:54.154801 Z
+references: []
+
+id: 93c98d176c94b6eaccac6d905892b132037451e5
+log_events: 
+- - 2011-10-17 23:18:55.112610 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""

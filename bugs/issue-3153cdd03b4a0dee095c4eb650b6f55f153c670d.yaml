@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Update README file.
+desc: ""
+type: :task
+component: kape1395.biosensor.solver-2D.deb
+release: 
+reporter: Karolis Petrauskas <k.petrauskas@gmail.com>
+status: :unstarted
+disposition: 
+creation_time: 2011-10-17 23:19:29.327106 Z
+references: []
+
+id: 3153cdd03b4a0dee095c4eb650b6f55f153c670d
+log_events: 
+- - 2011-10-17 23:19:30.131298 Z
+  - Karolis Petrauskas <k.petrauskas@gmail.com>
+  - created
+  - ""
