@@ -16,6 +16,14 @@ function get_prop() {
 UPSTREAM_VERSION=$(get_prop build.properties upstream_version)
 PACKAGING_SUFFIX=$(get_prop build.properties packaging_suffix)
 PACKAGE_VERSION=${UPSTREAM_VERSION}${PACKAGING_SUFFIX}
+CHANGELOG_VERSION=$(head -n 1  debian/changelog  | sed 's/.*(\(.*\)).*/\1/')
+
+if [[ "${PACKAGE_VERSION}" != "${CHANGELOG_VERSION}" ]] ; then
+    echo -ne "#\n# ERROR: Version in build.properties is different from that in debian/changelog.\n"
+    echo -ne "#        Have you forgotten to update it? You can use the following command to edit it:\n"
+    echo -ne "#        \$ dch -v ${PACKAGE_VERSION} \"Packaging upstream release version ${UPSTREAM_VERSION}.\"\n#\n"
+    exit 1
+fi
 
 if [[ $BATCH_MODE == Y ]] ; then
     echo -ne "# Build will be executed in the batch mode\n#\n"
@@ -49,6 +57,7 @@ fi
     make
     make dist
     cp biosensor-${UPSTREAM_VERSION}.tar.gz ../build/biosensor_${UPSTREAM_VERSION}.orig.tar.gz
+    git clean -fxd
     git reset --hard
 )
 
@@ -62,5 +71,8 @@ echo -ne "#\n# Preparing pakage source...\n#\n"
 echo -ne "#\n# Building source DEB...\n#\n"
 (
     cd build/biosensor-${UPSTREAM_VERSION}
-    debuild -S
+    debuild -sa -S
+    debuild -sa -b
 )
+
+

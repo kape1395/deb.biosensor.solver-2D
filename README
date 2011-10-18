@@ -1,0 +1,64 @@
+             Ubuntu / Debian packaging for the biosensor solver
+
+This package creates source and binary DEB packages for the biosensor modelling
+software (https://github.com/kape1395/biosensor.solver-2D). For the Ubuntu case,
+the main idea is to use Ubuntu PPA (https://launchpad.net/~kape1395/+archive/bio)
+for building binary packages so only source package is needed for this.
+
+The following steps should be ferformed for each upstream release (lets say
+0.6.6) if packaging details are not changing between releases:
+  1. Update version numbers in the build.properties file. Example of the
+     contents:
+         upstream_version=0.6.6
+         packaging_suffix=-0ubuntu3
+  2. Update debian/changelog file. For example:
+         $ dch -v 0.6.6-0ubuntu3 "Packaging upstream release version 0.6.6."
+  3. Invoke ./build.sh. You can to it by executing main target in the Makefile:
+         $ make
+     This will checkout corresponding tag of the upstream component and
+     create source distribution file (*.tar.gz).
+  4. Upload source package to the Ubuntu PPA. This can be done as follows:
+         $ ( cd build && dput ppa:kape1395/bio biosensor_*_source.changes )
+  5. Create tag, if build was successfull. Tag name should match package
+     version. In this case it can be created as follows:
+         $ git add build.properties debian/changelog
+         $ git commit -m "Packaging upstream release version 0.6.6."
+         $ git tag 0.6.6-0ubuntu3 -m "Packaging upstream release version 0.6.6."
+  6. Publish source code changes by pushing them to the github:
+         $ git push github 0.6.6-0ubuntu3 master
+
+If packaging details should be changed, one should modify contents of the debian
+directory acordingly.
+
+Apart from the Ubuntu PPA my local repository exists for storing Ubuntu and
+Debian packages. The repository can be found at http://karolis.5grupe.lt/repos-deb/.
+This repository is managed using reprepro. For more information I should look 
+at /home/www/repos-deb/README.
+
+
+For using above mentioned repositories you can add the following (or similar)
+lines to the /etc/apt/sources.list file:
+    deb http://karolis.5grupe.lt/repos-deb natty main
+    deb-src http://karolis.5grupe.lt/repos-deb natty main
+  or
+    deb http://ppa.launchpad.net/kape1395/bio/ubuntu oneiric main 
+    deb-src http://ppa.launchpad.net/kape1395/bio/ubuntu oneiric main 
+
+Add the repository key to a keystore,
+    wget http://karolis.5grupe.lt/repos-deb/karolis-debian-repository.gpg -O - | sudo apt-key add -
+
+You can use apt-get to install or upgrade the biosensor package:
+    sudo apt-get update
+    sudo apt-get install biosensor
+
+The follwing are several important links used when creating this package:
+    http://www.debian.org/doc/debian-policy/index.html
+    http://www.debian.org/doc/manuals/maint-guide/
+    http://www.debian.org/doc/manuals/repository-howto/repository-howto.en.html
+    https://help.ubuntu.com/community/AptMoveHowto
+    http://www.eyrie.org/~eagle/notes/debian/build-tools.html
+    https://wiki.ubuntu.com/PackagingGuide/Complete
+    https://help.launchpad.net/Packaging/PPA/BuildingASourcePackage
+
+--
+Karolis Petrauskas
