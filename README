@@ -5,17 +5,18 @@ software (https://github.com/kape1395/biosensor.solver-2D). For the Ubuntu case,
 the main idea is to use Ubuntu PPA (https://launchpad.net/~kape1395/+archive/bio)
 for building binary packages so only source package is needed for this.
 
-The following steps should be ferformed for each upstream release (lets say
-0.6.6) if packaging details are not changing between releases:
+
+The following steps should be performed for each upstream release (lets say
+0.6.6) if packaging details have not been changed between releases:
   1. Update version numbers in the build.properties file. Example of the
      contents:
          upstream_version=0.6.6
          packaging_suffix=-0ubuntu3
   2. Update debian/changelog file. For example:
          $ dch -v 0.6.6-0ubuntu3 "Packaging upstream release version 0.6.6."
-  3. Invoke ./build.sh. You can to it by executing main target in the Makefile:
+  3. Invoke ./build.sh. You can do this by executing main target in the Makefile:
          $ make
-     This will checkout corresponding tag of the upstream component and
+     This will checkout corresponding tag of the upstream package and
      create source distribution file (*.tar.gz).
   4. Upload source package to the Ubuntu PPA. This can be done as follows:
          $ ( cd build && dput ppa:kape1395/bio biosensor_*_source.changes )
@@ -30,26 +31,27 @@ The following steps should be ferformed for each upstream release (lets say
 If packaging details should be changed, one should modify contents of the debian
 directory acordingly.
 
-Apart from the Ubuntu PPA my local repository exists for storing Ubuntu and
+Apart from the Ubuntu PPA, my local repository exists for storing Ubuntu and
 Debian packages. The repository can be found at http://karolis.5grupe.lt/repos-deb/.
 This repository is managed using reprepro. For more information I should look 
 at /home/www/repos-deb/README.
 
 
-For using above mentioned repositories you can add the following (or similar)
-lines to the /etc/apt/sources.list file:
-    deb http://karolis.5grupe.lt/repos-deb natty main
-    deb-src http://karolis.5grupe.lt/repos-deb natty main
-  or
-    deb http://ppa.launchpad.net/kape1395/bio/ubuntu oneiric main 
-    deb-src http://ppa.launchpad.net/kape1395/bio/ubuntu oneiric main 
+Installing the package.
+  1. For using one of mentioned repositories you should tell the apt about it.
+  1.a For using PPA archive you should invoke the following command:
+        $ sudo add-apt-repository ppa:kape1395/bio
+  1.b Alternatively you can use DEB repository on the karolis.5grupe.lt (the same
+    approach can be used for the PPA repository also). For this approach you
+    should add the following (or similar) lines to the /etc/apt/sources.list file:
+        deb http://karolis.5grupe.lt/repos-deb natty main
+        deb-src http://karolis.5grupe.lt/repos-deb natty main
+  2. Add the repository key to a keystore,
+        $ wget http://karolis.5grupe.lt/repos-deb/karolis-debian-repository.gpg -O - | sudo apt-key add -
+  3. You can use apt-get to install or upgrade the biosensor package
+        $ sudo apt-get update
+        $ sudo apt-get install biosensor
 
-Add the repository key to a keystore,
-    wget http://karolis.5grupe.lt/repos-deb/karolis-debian-repository.gpg -O - | sudo apt-key add -
-
-You can use apt-get to install or upgrade the biosensor package:
-    sudo apt-get update
-    sudo apt-get install biosensor
 
 The follwing are several important links used when creating this package:
     http://www.debian.org/doc/debian-policy/index.html
