@@ -1,0 +1,60 @@
+biosensor (0.6.6-0ubuntu3) precise; urgency=low
+
+  * Migrating to git-buildpackage.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Sun, 19 Aug 2012 14:34:10 +0300
+
+biosensor (0.6.6-0ubuntu2) oneiric; urgency=low
+
+  * Redesign of the DEB packaging to be able to use Ubuntu PPA.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Sat, 15 Oct 2011 22:59:54 +0300
+
+biosensor (0.6.6-0ubuntu1) natty; urgency=low
+
+  * Packaging upstream release version 0.6.6.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Wed, 14 Sep 2011 01:19:49 +0300
+
+biosensor (0.6.5-1) lucid; urgency=low
+
+  * Packaging upstream release version 0.6.5.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Thu, 09 Sep 2010 00:06:45 +0300
+
+biosensor (0.6.4-1) lucid; urgency=low
+
+  * Packaging upstream release version 0.6.4.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Wed, 08 Sep 2010 23:19:59 +0300
+
+biosensor (0.4.3-1) lucid; urgency=low
+
+  * Packaging upstream release version 0.4.3.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Fri, 06 Aug 2010 05:34:13 +0300
+
+biosensor (0.4.2-1) karmic; urgency=low
+
+  * Packaging upstream release version 0.4.1.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Mon, 04 Jan 2010 23:30:22 +0200
+
+biosensor (0.4.1-1) karmic; urgency=low
+
+  * Packaging upstream release version 0.4.1.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Fri, 18 Dec 2009 22:37:22 +0200
+
+biosensor (0.4.0-1) karmic; urgency=low
+
+  * Packaging for release 0.4.0.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Wed, 09 Dec 2009 01:26:02 +0200
+
+biosensor (0.3.8-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Wed, 18 Mar 2009 22:28:11 +0200
+

@@ -1,0 +1,25 @@
+Source: biosensor
+Section: science
+Priority: extra
+Maintainer: Karolis Petrauskas <k.petrauskas@gmail.com>
+Build-Depends:
+ debhelper (>= 8.0.0), autotools-dev,
+ g++ (>=4:4.6),
+ xsdcxx (>=3.3.0),
+ libxerces-c-dev (>=3.1),
+ libtool (>=2.4),
+ libboost-dev (>=1.46),
+ libboost-filesystem-dev (>=1.46),
+ libboost-system-dev (>=1.46)
+Standards-Version: 3.9.2
+Homepage: http://karolis.5grupe.lt/home/phd/biosensor
+Vcs-Git: git://github.com/kape1395/biosensor.solver-2D.git
+Vcs-Browser: https://github.com/kape1395/biosensor.solver-2D
+
+Package: biosensor
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Description: Software for simulating operation of biosensors
+ Package "biosensor" provides programs and libraries that can be
+ used for simulation of biosensor operation in 1-D and 2-D cases.
+ Cylindrical and cartesian coordinate systems are supported.
