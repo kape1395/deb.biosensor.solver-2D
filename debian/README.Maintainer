@@ -6,8 +6,9 @@ cd kape1395.deb.biosensor.solver-2D
 git-import-orig -u 0.6.6 --upstream-branch=upstream --debian-branch=pkg-ubuntu --pristine-tar ../kape1395.biosensor.solver-2D/biosensor-0.6.6.tar.gz
 # Add debian/*
 git-buildpackage --git-pristine-tar --git-tag
-git-buildpackage --git-pristine-tar --git-builder="debuild -i\.git -I.git -S"
-git-buildpackage --git-pristine-tar --git-builder="debuild -i\.git -I.git -b"
+git-buildpackage --git-pristine-tar --git-builder="debuild -i\.git -I.git -S"     # To build source package only.
+git-buildpackage --git-pristine-tar --git-builder="debuild -i\.git -I.git -S -sa" # To build source package only, and include orig.tar.gz (first upload).
+git-buildpackage --git-pristine-tar --git-builder="debuild -i\.git -I.git -b"     # To build binary package.
 git clean -dxf
 git reset --hard
 dput karolis-ubuntu ../biosensor_0.6.6-0ubuntu3_i386.changes
