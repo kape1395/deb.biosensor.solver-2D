@@ -1,0 +1,12 @@
+################################################################################
+
+                             Biosensor solver
+
+################################################################################
+
+This software is an implementation of the finite-difference
+simulator for the biosensors. The main target of the solver
+is to be able to simulate operation of biosensors with
+different structure with no need for programming. The solver
+supports 1-D and 2-D models.
+

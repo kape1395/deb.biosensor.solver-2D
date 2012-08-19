@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ! Copyright 2011 Karolis Petrauskas
+ !
+ ! Licensed under the Apache License, Version 2.0 (the "License");
+ ! you may not use this file except in compliance with the License.
+ ! You may obtain a copy of the License at
+ !
+ !     http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<xs:schema
+    targetNamespace ="http://karolis.5grupe.lt/biosensor/model/solver"
+    xmlns           ="http://karolis.5grupe.lt/biosensor/model/solver"
+    xmlns:m         ="http://karolis.5grupe.lt/biosensor/model"
+    xmlns:xs        ="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+    
+    
+    
+    <xs:import
+        namespace="http://karolis.5grupe.lt/biosensor/model"
+        schemaLocation="Model.xsd">
+    </xs:import>
+
+
+    <xs:attributeGroup name="StepInTime">
+        <xs:attribute name="stepCount"  type="xs:int"    use="optional"/>
+        <xs:attribute name="time"       type="xs:double" use="optional"/>
+    </xs:attributeGroup>
+    
+    
+    <xs:complexType name="FiniteDifferences">
+        <xs:complexContent>
+            <xs:extension base="m:Solver">
+                <xs:sequence>
+                    <xs:element name="axis"             type="Axis"             minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="stopCondition"    type="StopCondition"    minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="timeStepAdjuster" type="TimeStepAdjuster" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="timeStep" type="xs:double" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Explicit1D">
+        <xs:complexContent>
+            <xs:extension base="FiniteDifferences">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Implicit1D">
+        <xs:complexContent>
+            <xs:extension base="FiniteDifferences">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Explicit2D">
+        <xs:complexContent>
+            <xs:extension base="FiniteDifferences">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Implicit2D">
+        <xs:complexContent>
+            <xs:extension base="FiniteDifferences">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="Axis">
+        <xs:attribute name="from" type="m:SymbolName" use="required"/>
+        <xs:attribute name="to"   type="m:SymbolName" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ConstantAxisPart">
+        <xs:complexContent>
+            <xs:extension base="Axis">
+                <xs:attribute name="stepCount" type="xs:integer" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BilinearAxisPart">
+        <xs:complexContent>
+            <xs:extension base="Axis">
+                <xs:attribute name="startStep" type="xs:double" use="required"/>
+                <xs:attribute name="factor"    type="xs:double" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
+    
+    <!-- ******************************************************************* -->
+    <!-- ******************************************************************* -->
+    <xs:complexType name="ConcentrationProfile">
+        <xs:complexContent>
+            <xs:extension base="m:SolverOutput">
+                <xs:attribute name="precision" type="xs:int" use="optional">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Precision, used when formatting numbers for the output.
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="inMemory" type="xs:boolean" default="false" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="CurrentDensity">
+        <xs:complexContent>
+            <xs:extension base="m:SolverOutput"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AveragedConcentration">
+        <xs:complexContent>
+            <xs:extension base="m:SolverOutput">
+                <xs:attribute name="medium" type="m:MediumName" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="SteadyStateHalfTime">
+        <xs:complexContent>
+            <xs:extension base="m:SolverOutput"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SteadyState">
+        <xs:complexContent>
+            <xs:extension base="m:SolverOutput">
+                <xs:sequence>
+                    <xs:element name="output" type="m:SolverOutput" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Kinetic">
+        <xs:complexContent>
+            <xs:extension base="m:SolverOutput">
+                <xs:sequence>
+                    <xs:element name="output" type="m:SolverOutput" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attributeGroup ref="StepInTime"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+
+    <!-- ******************************************************************* -->
+    <!-- ******************************************************************* -->
+    <xs:complexType name="StopCondition" abstract="true">
+    </xs:complexType>
+    
+    <xs:complexType name="StopConditionValidAfter">
+        <xs:complexContent>
+            <xs:extension base="StopCondition">
+                <xs:sequence>
+                    <xs:element name="stopCondition" type="StopCondition" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attributeGroup ref="StepInTime"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="FailIfAbove">
+        <xs:complexContent>
+            <xs:extension base="StopCondition">
+                <xs:attributeGroup ref="StepInTime"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="FailIfInvalidConcentrations">
+        <xs:complexContent>
+            <xs:extension base="StopCondition"/>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="FailOnConcentrationOscillation">
+        <xs:annotation>
+            <xs:documentation>
+                Should fail, is oscilations are found in the concentrations.
+                I.e. second partial derivatives for adjacent points have different sign.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="StopCondition"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="FailISumOfConcentrationsNonConst">
+        <xs:complexContent>
+            <xs:extension base="StopCondition">
+                <xs:sequence>
+                    <xs:element name="substance" type="m:SubstanceName" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="medium" type="m:MediumName" use="required"/>
+                <xs:attribute name="sum"    type="m:SymbolName" use="required"/>
+                <xs:attribute name="error"  type="xs:double"    use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="CurrentDensityGradient">
+        <xs:complexContent>
+            <xs:extension base="StopCondition">
+                <xs:attribute name="lessThan"   type="xs:double"    use="required"/>
+                <xs:attribute name="normalized" type="xs:boolean"   use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    
+    <!-- ******************************************************************* -->
+    <!-- ******************************************************************* -->
+    <xs:complexType name="TimeStepAdjuster" abstract="true">
+    </xs:complexType>
+
+    <xs:complexType name="SimpleTimeStepAdjuster">
+        <xs:complexContent>
+            <xs:extension base="TimeStepAdjuster">
+                <xs:attribute name="factor"         type="xs:double"    use="required"/>
+                <xs:attribute name="everyStepCount" type="xs:integer"   use="required"/>
+                <xs:attribute name="maxStepSize"    type="xs:double"    use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AdaptiveTimeStepAdjuster">
+        <xs:annotation>
+            <xs:documentation>
+                Extends simple tine step adjuster by decreasing time step
+                if failure occurs. It also should go back in time in such
+                situation.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="TimeStepAdjuster">
+                <xs:sequence>
+                    <xs:element name="increase" minOccurs="1" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Specifies rules for increasing timestep.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:attribute name="factor"         type="xs:double"    use="required"/>
+                            <xs:attribute name="everyStepCount" type="xs:integer"   use="required"/>
+                            <xs:attribute name="maxStepSize"    type="xs:double"    use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="fallback" minOccurs="1" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Specifies rules for doing fallback in time.
+                            </xs:documentation>
+                        </xs:annotation>
+                        <xs:complexType>
+                            <xs:attribute name="factor"                 type="xs:double"    use="required"/>
+                            <xs:attribute name="forStepCount"           type="xs:integer"   use="required"/>
+                            <xs:attribute name="checkEveryStepCount"    type="xs:integer"   use="required"/>
+                            <xs:attribute name="minStepSize"            type="xs:double"    use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="stateStore" type="ConcentrationProfile" minOccurs="1" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                                This element configures storage of intermediate states,
+                                used for going back in time.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="stopCondition" type="StopCondition" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Stop conditions used to determine "bad" state.
+                                These can also report good states also.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <!-- ******************************************************************* -->
+</xs:schema>

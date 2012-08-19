@@ -1,0 +1,4 @@
+This list stands for known issues and other future plans,
+  * Investigate oscillation and its impact on dynamic steps by time.
+  * Use SBML.
+  * 

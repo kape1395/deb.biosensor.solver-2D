@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ! Copyright 2011 Karolis Petrauskas
+ !
+ ! Licensed under the Apache License, Version 2.0 (the "License");
+ ! you may not use this file except in compliance with the License.
+ ! You may obtain a copy of the License at
+ !
+ !     http://www.apache.org/licenses/LICENSE-2.0
+ !
+ ! Unless required by applicable law or agreed to in writing, software
+ ! distributed under the License is distributed on an "AS IS" BASIS,
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ! See the License for the specific language governing permissions and
+ ! limitations under the License.
+ !-->
+<xs:schema
+    targetNamespace ="http://karolis.5grupe.lt/biosensor/model"
+    xmlns           ="http://karolis.5grupe.lt/biosensor/model"
+    xmlns:xs        ="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified">
+    
+    
+    
+    <xs:element name="model" type="Model"/>
+    
+    
+    
+    <xs:complexType name="Model">
+        <xs:sequence>
+            <xs:element name="axis"         type="Axis"         minOccurs="1" maxOccurs="2"/>
+            <xs:element name="substance"    type="Substance"    minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="reaction"     type="Reaction"     minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="medium"       type="Medium"       minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="bound"        type="Bound"        minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="transducer"   type="Transducer"   minOccurs="0" maxOccurs="1"/>
+            <xs:element name="symbol"       type="Symbol"       minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="solver"       type="Solver"       minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="coordinateSystem" type="CoordinateSystem" use="required"/>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="Axis">
+        <xs:sequence>
+            <xs:element name="point" type="AxisPoint" minOccurs="2" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="AxisName" use="required"/>
+    </xs:complexType>
+    
+    <xs:complexType name="AxisPoint">
+        <xs:attribute name="position" type="SymbolName" use="required"/>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="Substance">
+        <xs:attribute name="name" type="SubstanceName" use="required"/>
+    </xs:complexType>
+    
+
+
+    <xs:complexType name="Reaction" abstract="true">
+        <xs:attribute name="name" type="ReactionName" use="required"/>
+    </xs:complexType>
+
+
+    
+    <xs:complexType name="Medium">
+        <xs:sequence>
+            <xs:element name="substance" type="MediumSubstance" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="reaction"  type="MediumReaction"  minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="area"      type="MediumArea"      minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="MediumName" use="required"/>
+        <xs:attribute name="diffusionRatio" type="SymbolName" use="optional">
+            <xs:annotation>
+                <xs:documentation>
+                    D_z = diffusionRatio * D_r
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="MediumSubstance">
+        <xs:attribute name="name"       type="SubstanceName" use="required"/>
+        <xs:attribute name="diffusion"  type="SymbolName"    use="optional"/>
+        <xs:attribute name="initial"    type="SymbolName"    use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="MediumReaction">
+        <xs:attribute name="name" type="ReactionName" use="required"/>
+    </xs:complexType>
+    
+    <xs:complexType name="MediumArea">
+        <xs:attribute name="top"    type="SymbolName" use="optional"/>
+        <xs:attribute name="bottom" type="SymbolName" use="optional"/>
+        <xs:attribute name="left"   type="SymbolName" use="optional"/>
+        <xs:attribute name="right"  type="SymbolName" use="optional"/>
+        <xs:attribute name="from"   type="SymbolName" use="optional"/>
+        <xs:attribute name="to"     type="SymbolName" use="optional"/>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="Bound">
+        <xs:sequence>
+            <xs:element name="substance" type="BoundSubstance" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="reaction"  type="BoundReaction"  minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name"   type="BoundName"    use="optional"/>
+        <xs:attribute name="from"   type="SymbolName"   use="optional"/>
+        <xs:attribute name="to"     type="SymbolName"   use="optional"/>
+        <xs:attribute name="at"     type="SymbolName"   use="required"/>
+    </xs:complexType>
+    
+    <xs:complexType name="BoundSubstance" abstract="true">
+        <xs:attribute name="name" type="SubstanceName" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="BoundReaction">
+        <xs:attribute name="name" type="ReactionName" use="required"/>
+    </xs:complexType>
+    
+    
+
+    <xs:complexType name="Transducer" abstract="true">
+        <xs:attribute name="name" type="TransducerName" use="required"/>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="Symbol">
+        <xs:attribute name="name"       type="SymbolName" use="required"/>
+        <xs:attribute name="value"      type="xs:double"  use="required"/>
+        <xs:attribute name="dimension"  type="xs:string"  use="optional"/>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="Solver" abstract="true">
+        <xs:sequence>
+            <xs:element name="output" type="SolverOutput" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SolverOutput" abstract="true">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    
+
+    <xs:simpleType name="CoordinateSystem">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Cartesian"/>
+            <xs:enumeration value="Cylindrical"/>
+            <xs:enumeration value="Linear"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SubstanceName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="MediumName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ReactionName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AxisName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="BoundName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="TransducerName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SymbolName">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+    
+</xs:schema>

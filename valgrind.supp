@@ -1,0 +1,73 @@
+{
+   log4cxx_bugs1
+   Memcheck:Addr1
+   fun:getenv
+}
+{
+   log4cxx_bugs2
+   Memcheck:Addr2
+   fun:getenv
+}
+{
+   log4cxx_bugs3
+   Memcheck:Addr1
+   fun:tzset_internal
+}
+{
+   log4cxx_bugs4
+   Memcheck:Addr1
+   fun:__add_to_environ
+}
+{
+   log4cxx_bugs5
+   Memcheck:Addr1
+   fun:strncmp
+}
+{
+   log4cxx_bugs6
+   Memcheck:Free
+   fun:_ZdlPv
+   fun:_ZN7log4cxx7helpers15StringTokenizerD1Ev
+   fun:_ZN7log4cxx20PropertyConfigurator13parseCategoryERNS_7helpers10PropertiesERNS1_10ObjectPtrTINS_6LoggerEEERKSsS9_S9_
+   fun:_ZN7log4cxx20PropertyConfigurator21configureRootCategoryERNS_7helpers10PropertiesERNS1_10ObjectPtrTINS_3spi16LoggerRepositoryEEE
+   fun:_ZN7log4cxx20PropertyConfigurator11doConfigureERNS_7helpers10PropertiesERNS1_10ObjectPtrTINS_3spi16LoggerRepositoryEEE
+   fun:_ZN7log4cxx20PropertyConfigurator11doConfigureERKSsRNS_7helpers10ObjectPtrTINS_3spi16LoggerRepositoryEEE
+   fun:_ZN7log4cxx7helpers15OptionConverter18selectAndConfigureERKSsS3_RNS0_10ObjectPtrTINS_3spi16LoggerRepositoryEEE
+   fun:_ZN7log4cxx10LogManager19getLoggerRepositoryEv
+   fun:_ZN7log4cxx10LogManager9getLoggerERKSs
+   fun:_ZN7log4cxx6Logger9getLoggerERKSs
+   fun:main
+}
+{
+   xerces_bugs1
+   Memcheck:Cond
+   fun:_ZN11xercesc_2_717XMLUTF8Transcoder13transcodeFromEPKhjPtjRjPh
+   fun:_ZN11xercesc_2_79XMLReader14xcodeMoreCharsEPtPhj
+   fun:_ZN11xercesc_2_79XMLReader17refreshCharBufferEv
+   fun:_ZN11xercesc_2_79ReaderMgr12peekNextCharEv
+   fun:_ZN11xercesc_2_710XMLScanner10scanPrologEv
+   fun:_ZN11xercesc_2_712IGXMLScanner12scanDocumentERKNS_11InputSourceE
+   fun:_ZN11xercesc_2_710XMLScanner12scanDocumentEPKt
+   fun:_ZN11xercesc_2_717AbstractDOMParser5parseEPKt
+   fun:_ZN11xercesc_2_714DOMBuilderImpl8parseURIEPKt
+   fun:_ZN3xsd3cxx3xml3dom5parseIcEENS2_8auto_ptrIN11xercesc_2_711DOMDocumentEEERKSbIT_St11char_traitsIS8_ESaIS8_EERNS5_15DOMErrorHandlerERKNS1_10propertiesIS8_EEm
+   fun:_ZN3xsd3cxx3xml3dom5parseIcEENS2_8auto_ptrIN11xercesc_2_711DOMDocumentEEERKSbIT_St11char_traitsIS8_ESaIS8_EERNS1_13error_handlerIS8_EERKNS1_10propertiesIS8_EEm
+   fun:_ZN3bio3xml5model5modelERKSsN3xsd3cxx4tree5flagsERKNS6_10propertiesIcEE
+}
+{
+   xerces_memleak_1
+   Memcheck:Leak
+   fun:malloc
+   fun:uprv_malloc_3_8
+   obj:/usr/lib/libicuuc.so.38.0
+   obj:/usr/lib/libicuuc.so.38.0
+   obj:/usr/lib/libicuuc.so.38.0
+   obj:/usr/lib/libicuuc.so.38.0
+   obj:/usr/lib/libicuuc.so.38.0
+   obj:/usr/lib/libicuuc.so.38.0
+   obj:/usr/lib/libicuuc.so.38.0
+   fun:u_init_3_8
+   fun:_ZN11xercesc_2_715ICUTransServiceC1Ev
+   fun:_ZN11xercesc_2_716XMLPlatformUtils16makeTransServiceEv
+}
+

@@ -1,0 +1,24 @@
+.\" ============================================================================
+.TH bio-solver 1 2008-11-02 "" "Biosensor modelling"
+.SH NAME
+bio-solver \- Biosensor modeller
+.\" ============================================================================
+.SH SYNOPSIS
+.B bio-solver
+.I model-file
+.I output-dir
+.\" ============================================================================
+.SH DESCRIPTION
+.B bio-solver
+performs simulations of the biosensor, specified in 
+.IR model-file ,
+which describes biosensor in XML format. An output is written to a directory
+.IR output-dir .
+.\" ============================================================================
+.SH AUTHOR
+Karolis Petrauskas <k dot petrauskas at gmail dot com>
+.\" ============================================================================
+.SH "SEE ALSO"
+.BR bio-output (1)
+.BR bio-editor (1)
+
