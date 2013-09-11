@@ -16,5 +16,6 @@ dput karolis-ubuntu ../biosensor_0.6.6-0ubuntu3_i386.changes
 # Build new version:
 git-import-orig ../biosensor_0.6.7.tar.gz  # On the branch pkg-ubuntu
 dch -v 0.6.7-0ubuntu1 "Packaging upstream release version 0.6.7."
+dch -r
 # Proceed with `git-buildpackage --git-pristine-tar --git-builder="debuild -i\.git -I.git -S"` and folowing commands.
 

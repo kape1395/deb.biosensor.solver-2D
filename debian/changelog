@@ -1,3 +1,9 @@
+biosensor (0.6.7-0ubuntu2) raring; urgency=low
+
+  * Wrong release was left in changelog.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Wed, 11 Sep 2013 07:37:14 +0300
+
 biosensor (0.6.7-0ubuntu1) UNRELEASED; urgency=low
 
   * Packaging upstream release version 0.6.7.
