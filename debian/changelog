@@ -1,3 +1,9 @@
+biosensor (0.6.7-0ubuntu1) UNRELEASED; urgency=low
+
+  * Packaging upstream release version 0.6.7.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Wed, 11 Sep 2013 07:13:48 +0300
+
 biosensor (0.6.6-0ubuntu3) precise; urgency=low
 
   * Migrating to git-buildpackage.
