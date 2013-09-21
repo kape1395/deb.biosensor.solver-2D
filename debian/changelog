@@ -1,3 +1,9 @@
+biosensor (0.6.8-0ubuntu1) raring; urgency=low
+
+  * Packaging upstream release version 0.6.8.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Sat, 21 Sep 2013 17:02:11 +0300
+
 biosensor (0.6.7-0ubuntu2) raring; urgency=low
 
   * Wrong release was left in changelog.
