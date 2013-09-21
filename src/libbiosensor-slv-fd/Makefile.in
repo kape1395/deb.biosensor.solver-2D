@@ -125,6 +125,7 @@ am_libbiosensor_slv_fd_la_OBJECTS =  \
 	bio/slv/fd/im2d/libbiosensor_slv_fd_la-ConstantCondition.lo \
 	bio/slv/fd/im2d/libbiosensor_slv_fd_la-ConstantOnEdge.lo \
 	bio/slv/fd/im2d/libbiosensor_slv_fd_la-GradCondition.lo \
+	bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo \
 	bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceGradOnEdge.lo \
 	bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubSolverFactory.lo \
 	bio/slv/fd/im2d/libbiosensor_slv_fd_la-MergeCondition.lo \
@@ -322,6 +323,7 @@ libbiosensor_slv_fd_la_SOURCES = \
     bio/slv/fd/im2d/ConstantCondition.cxx \
     bio/slv/fd/im2d/ConstantOnEdge.cxx \
     bio/slv/fd/im2d/GradCondition.cxx \
+    bio/slv/fd/im2d/SubstanceConcOnEdge.cxx \
     bio/slv/fd/im2d/SubstanceGradOnEdge.cxx \
     bio/slv/fd/im2d/SubSolverFactory.cxx \
     bio/slv/fd/im2d/MergeCondition.cxx \
@@ -350,6 +352,7 @@ EXTRA_DIST = \
     bio/slv/fd/im2d/ISubSolverFactory.hxx \
     bio/slv/fd/im2d/ConstantCondition.hxx \
     bio/slv/fd/im2d/ConstantOnEdge.hxx \
+    bio/slv/fd/im2d/SubstanceConcOnEdge.hxx \
     bio/slv/fd/im2d/SubstanceGradOnEdge.hxx \
     bio/slv/fd/im2d/SubSolverFactory.hxx \
     bio/slv/fd/im2d/MergeCondition.hxx \
@@ -504,6 +507,9 @@ bio/slv/fd/im2d/libbiosensor_slv_fd_la-ConstantOnEdge.lo:  \
 bio/slv/fd/im2d/libbiosensor_slv_fd_la-GradCondition.lo:  \
 	bio/slv/fd/im2d/$(am__dirstamp) \
 	bio/slv/fd/im2d/$(DEPDIR)/$(am__dirstamp)
+bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo:  \
+	bio/slv/fd/im2d/$(am__dirstamp) \
+	bio/slv/fd/im2d/$(DEPDIR)/$(am__dirstamp)
 bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceGradOnEdge.lo:  \
 	bio/slv/fd/im2d/$(am__dirstamp) \
 	bio/slv/fd/im2d/$(DEPDIR)/$(am__dirstamp)
@@ -549,6 +555,8 @@ mostlyclean-compile:
 	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-Solver.lo
 	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubSolverFactory.$(OBJEXT)
 	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubSolverFactory.lo
+	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.$(OBJEXT)
+	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo
 	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceGradOnEdge.$(OBJEXT)
 	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceGradOnEdge.lo
 	-rm -f bio/slv/fd/im2d/libbiosensor_slv_fd_la-WallCondition.$(OBJEXT)
@@ -577,6 +585,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-MergeCondition.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-Solver.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-SubSolverFactory.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-SubstanceConcOnEdge.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-SubstanceGradOnEdge.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-WallCondition.Plo@am__quote@
 
@@ -701,6 +710,13 @@ bio/slv/fd/im2d/libbiosensor_slv_fd_la-GradCondition.lo: bio/slv/fd/im2d/GradCon
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='bio/slv/fd/im2d/GradCondition.cxx' object='bio/slv/fd/im2d/libbiosensor_slv_fd_la-GradCondition.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbiosensor_slv_fd_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o bio/slv/fd/im2d/libbiosensor_slv_fd_la-GradCondition.lo `test -f 'bio/slv/fd/im2d/GradCondition.cxx' || echo '$(srcdir)/'`bio/slv/fd/im2d/GradCondition.cxx
+
+bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo: bio/slv/fd/im2d/SubstanceConcOnEdge.cxx
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbiosensor_slv_fd_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo -MD -MP -MF bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-SubstanceConcOnEdge.Tpo -c -o bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo `test -f 'bio/slv/fd/im2d/SubstanceConcOnEdge.cxx' || echo '$(srcdir)/'`bio/slv/fd/im2d/SubstanceConcOnEdge.cxx
+@am__fastdepCXX_TRUE@	$(am__mv) bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-SubstanceConcOnEdge.Tpo bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-SubstanceConcOnEdge.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='bio/slv/fd/im2d/SubstanceConcOnEdge.cxx' object='bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbiosensor_slv_fd_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceConcOnEdge.lo `test -f 'bio/slv/fd/im2d/SubstanceConcOnEdge.cxx' || echo '$(srcdir)/'`bio/slv/fd/im2d/SubstanceConcOnEdge.cxx
 
 bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceGradOnEdge.lo: bio/slv/fd/im2d/SubstanceGradOnEdge.cxx
 @am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbiosensor_slv_fd_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceGradOnEdge.lo -MD -MP -MF bio/slv/fd/im2d/$(DEPDIR)/libbiosensor_slv_fd_la-SubstanceGradOnEdge.Tpo -c -o bio/slv/fd/im2d/libbiosensor_slv_fd_la-SubstanceGradOnEdge.lo `test -f 'bio/slv/fd/im2d/SubstanceGradOnEdge.cxx' || echo '$(srcdir)/'`bio/slv/fd/im2d/SubstanceGradOnEdge.cxx
