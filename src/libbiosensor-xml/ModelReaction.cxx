@@ -211,6 +211,36 @@ namespace bio
           this->rate_.set (x);
         }
 
+        const ReductionOxidation::bw_rate_optional& ReductionOxidation::
+        bw_rate () const
+        {
+          return this->bw_rate_;
+        }
+
+        ReductionOxidation::bw_rate_optional& ReductionOxidation::
+        bw_rate ()
+        {
+          return this->bw_rate_;
+        }
+
+        void ReductionOxidation::
+        bw_rate (const bw_rate_type& x)
+        {
+          this->bw_rate_.set (x);
+        }
+
+        void ReductionOxidation::
+        bw_rate (const bw_rate_optional& x)
+        {
+          this->bw_rate_ = x;
+        }
+
+        void ReductionOxidation::
+        bw_rate (::std::auto_ptr< bw_rate_type > x)
+        {
+          this->bw_rate_.set (x);
+        }
+
 
         // ReductionOxidationElement
         // 
@@ -439,7 +469,8 @@ namespace bio
         : ::bio::xml::model::Reaction (name),
           substrate_ (::xml_schema::flags (), this),
           product_ (::xml_schema::flags (), this),
-          rate_ (rate, ::xml_schema::flags (), this)
+          rate_ (rate, ::xml_schema::flags (), this),
+          bw_rate_ (::xml_schema::flags (), this)
         {
         }
 
@@ -450,7 +481,8 @@ namespace bio
         : ::bio::xml::model::Reaction (x, f, c),
           substrate_ (x.substrate_, f, this),
           product_ (x.product_, f, this),
-          rate_ (x.rate_, f, this)
+          rate_ (x.rate_, f, this),
+          bw_rate_ (x.bw_rate_, f, this)
         {
         }
 
@@ -461,7 +493,8 @@ namespace bio
         : ::bio::xml::model::Reaction (e, f | ::xml_schema::flags::base, c),
           substrate_ (f, this),
           product_ (f, this),
-          rate_ (f, this)
+          rate_ (f, this),
+          bw_rate_ (f, this)
         {
           if ((f & ::xml_schema::flags::base) == 0)
           {
@@ -555,6 +588,15 @@ namespace bio
                 rate_traits::create (i, f, this));
 
               this->rate_.set (r);
+              continue;
+            }
+
+            if (n.name () == "bw_rate" && n.namespace_ ().empty ())
+            {
+              ::std::auto_ptr< bw_rate_type > r (
+                bw_rate_traits::create (i, f, this));
+
+              this->bw_rate_.set (r);
               continue;
             }
           }
@@ -847,6 +889,18 @@ namespace bio
                 e));
 
             a << i.rate ();
+          }
+
+          // bw_rate
+          //
+          if (i.bw_rate ())
+          {
+            ::xercesc::DOMAttr& a (
+              ::xsd::cxx::xml::dom::create_attribute (
+                "bw_rate",
+                e));
+
+            a << *i.bw_rate ();
           }
         }
 
