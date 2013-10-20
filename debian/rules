@@ -9,14 +9,14 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-CXXFLAGS=-g -O2 -ansi -Wall -DLOG_LEVEL_INFO -DBOOST_FILESYSTEM_VERSION=2
+CXXFLAGS=-g -O2 -ansi -Wall -DLOG_LEVEL_INFO
 
 %:
 	dh $@ 
 
 override_dh_auto_configure:
-	# ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs" CXXFLAGS="$(CXXFLAGS)" --with-boost-filesystem=boost_filesystem-mt
-	dh_auto_configure -- CXXFLAGS="$(CXXFLAGS)" --with-boost-filesystem=boost_filesystem-mt
+	# ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs" CXXFLAGS="$(CXXFLAGS)"
+	dh_auto_configure -- CXXFLAGS="$(CXXFLAGS)"
 
 override_dh_install:
 	dh_install
