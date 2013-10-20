@@ -1,3 +1,9 @@
+biosensor (0.6.9-0ubuntu2) saucy; urgency=low
+
+  * Packaging 0.6.8 for saucy.
+
+ -- Karolis Petrauskas <k.petrauskas@gmail.com>  Sun, 20 Oct 2013 13:09:42 +0300
+
 biosensor (0.6.9-0ubuntu1) raring; urgency=low
 
   * Packaging upstream release version 0.6.9.
