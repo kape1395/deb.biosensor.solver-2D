@@ -22,7 +22,7 @@
  */
 
 
-#define BIO_VERSION "0.6.9"
+#define BIO_VERSION "0.6.10"
 
 
 /** \namespace bio
