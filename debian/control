@@ -11,7 +11,7 @@ Build-Depends:
  libboost-dev (>=1.53),
  libboost-filesystem-dev (>=1.53),
  libboost-system-dev (>=1.53)
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: http://karolis.5grupe.lt/home/dev/index.html
 Vcs-Git: git://github.com/kape1395/biosensor.solver-2D.git
 Vcs-Browser: https://github.com/kape1395/biosensor.solver-2D
